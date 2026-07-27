@@ -149,7 +149,7 @@ export async function POST(req: NextRequest) {
 
 try {
   const info = await transporter.sendMail({
-    from: MAIL_FROM || SMTP_USER,
+    from: SMTP_USER!,
     to: RECIPIENTS,
     replyTo: email,
     subject,
