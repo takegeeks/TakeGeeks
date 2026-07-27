@@ -160,18 +160,14 @@ try {
   console.log("Mail sent:", info);
 
   return NextResponse.json({ ok: true });
-} catch (err) {
-  console.error("SMTP_USER:", SMTP_USER);
-  console.error("MAIL_FROM:", MAIL_FROM);
-  console.error("SMTP_HOST:", SMTP_HOST);
-  console.error("SMTP_PORT:", SMTP_PORT);
-  console.error("Full error:", err);
+}catch (err) {
+  console.error("Failed to send application email:", err);
 
   return NextResponse.json(
     {
-      error: err instanceof Error ? err.message : String(err),
+      error: "Couldn't send your application. Please try again in a moment.",
     },
-    { status: 500 }
+    { status: 502 }
   );
 }
 }
