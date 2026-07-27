@@ -158,6 +158,8 @@ try {
   });
 
   console.log("Mail sent:", info);
+
+  return NextResponse.json({ ok: true });
 } catch (err) {
   console.error("SMTP_USER:", SMTP_USER);
   console.error("MAIL_FROM:", MAIL_FROM);
@@ -171,7 +173,8 @@ try {
     },
     { status: 500 }
   );
-}}
+}
+}
 
 function escapeHtml(value: string) {
   return value
