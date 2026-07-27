@@ -11,7 +11,7 @@ import { FAQ } from "@/app/components/site/faq";
 import { Footer } from "@/app/components/site/footer";
 
 export const metadata: Metadata = {
-  title: "TakeGeeks — Software Engineering Apprenticeship",
+  title: "TakeGeeks - Software Engineering Apprenticeship",
   description:
     "TakeGeeks is a Software Engineering Apprenticeship where students learn by building real products, collaborating with teams, and following professional engineering workflows. Apply for Batch 1.",
   keywords: [
@@ -24,14 +24,14 @@ export const metadata: Metadata = {
     "TakeGeeks",
   ],
   openGraph: {
-    title: "TakeGeeks — Software Engineering Apprenticeship",
+    title: "TakeGeeks - Software Engineering Apprenticeship",
     description:
       "Become a Software Engineer by Working on Real Products. Git, GitHub, code reviews, Agile sprints, and real projects, under mentor guidance.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "TakeGeeks — Software Engineering Apprenticeship",
+    title: "TakeGeeks - Software Engineering Apprenticeship",
     description:
       "Become a Software Engineer by Working on Real Products. Apply for Batch 1.",
   },
