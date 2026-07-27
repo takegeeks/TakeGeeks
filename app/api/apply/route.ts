@@ -147,25 +147,31 @@ export async function POST(req: NextRequest) {
     </div>
   `;
 
-  try {
-    await transporter.sendMail({
-      from: MAIL_FROM || SMTP_USER,
-      to: RECIPIENTS,
-      replyTo: email,
-      subject,
-      text,
-      html,
-    });
-  } catch (err) {
-    console.error("Failed to send application email:", err);
-    return NextResponse.json(
-      { error: "Couldn't send your application. Please try again in a moment." },
-      { status: 502 }
-    );
-  }
+try {
+  const info = await transporter.sendMail({
+    from: MAIL_FROM || SMTP_USER,
+    to: RECIPIENTS,
+    replyTo: email,
+    subject,
+    text,
+    html,
+  });
 
-  return NextResponse.json({ ok: true });
-}
+  console.log("Mail sent:", info);
+} catch (err) {
+  console.error("SMTP_USER:", SMTP_USER);
+  console.error("MAIL_FROM:", MAIL_FROM);
+  console.error("SMTP_HOST:", SMTP_HOST);
+  console.error("SMTP_PORT:", SMTP_PORT);
+  console.error("Full error:", err);
+
+  return NextResponse.json(
+    {
+      error: err instanceof Error ? err.message : String(err),
+    },
+    { status: 500 }
+  );
+}}
 
 function escapeHtml(value: string) {
   return value
