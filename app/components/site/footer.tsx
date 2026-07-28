@@ -1,4 +1,5 @@
 import { Terminal, MessageCircle } from "lucide-react";
+import Image from "next/image";
 import { FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const links = [
@@ -32,14 +33,15 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
           <div>
-            <div className="flex items-center gap-2">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-500 text-white">
-                <Terminal className="h-4 w-4" strokeWidth={2.5} />
-              </span>
-              <span className="text-[15px] font-semibold text-white">
-                TakeGeeks
-              </span>
-            </div>
+           <div className="flex items-center">
+              <Image
+                src="/logo/Logo-large.png"
+                alt="TakeGeeks"
+                width={180}
+                height={48}
+                className="h-12 w-auto object-contain"
+              />
+           </div>
 
             <p className="mt-3 text-sm leading-relaxed text-slate-400">
               Software Engineering Apprenticeship

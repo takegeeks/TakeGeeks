@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, X, Terminal } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/app/components/ui/button";
+import Image from "next/image";
 
 const links = [
   { label: "Why Us", href: "#why-takegeeks" },
@@ -31,16 +32,21 @@ export function Navbar() {
       }`}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-        <a href="#" className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-500 text-white">
-            <Terminal className="h-4 w-4" strokeWidth={2.5} />
-          </span>
-          <span className="text-[15px] font-semibold tracking-tight text-slate-900">
-            TakeGeeks
-          </span>
+       <a href="#" className="flex items-center gap-2.5">
+          <Image
+            src="/logo/Logo-512.png"
+            alt="TakeGeeks"
+            width={40}
+            height={40}
+            priority
+            className="h-10 w-10 object-contain"
+          />
+           <span className="text-lg font-semibold tracking-tight">
+             <span className="text-slate-900">Take</span>
+             <span className="text-blue-600">Geeks</span>
+           </span>
         </a>
-
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-10 md:flex">
           {links.map((link) => (
             <a
               key={link.href}
