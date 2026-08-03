@@ -128,7 +128,7 @@ export function ApplyForm() {
           />
         </Field>
 
-        <Field label="Phone (optional)" htmlFor="phone">
+        <Field label="Phone" htmlFor="phone">
           <input
             id="phone"
             name="phone"

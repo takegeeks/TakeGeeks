@@ -72,9 +72,9 @@ export async function POST(req: NextRequest) {
   }
 
   // 4. Required fields.
-  if (!name?.trim() || !email?.trim() || !experience?.trim() || !heardFrom?.trim() || !motivation?.trim()) {
+  if (!name?.trim() || !email?.trim() || !phone?.trim() || !experience?.trim() || !heardFrom?.trim() || !motivation?.trim()) {
     return NextResponse.json(
-      { error: "Name, email, experience level, how you heard about TakeGeeks, and motivation are required."},
+      { error: "Name, email, phone, experience level, how you heard about TakeGeeks, and motivation are required."},
       { status: 400 }
     );
   }
