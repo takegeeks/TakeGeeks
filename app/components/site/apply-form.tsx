@@ -18,6 +18,18 @@ export function ApplyForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const startedAtRef = useRef(Date.now());
+  const hearAboutOptions = [
+    "Instagram",
+    "LinkedIn",
+    "YouTube",
+    "X (Twitter)",
+    "Friend / Referral",
+    "WhatsApp",
+    "College",
+    "Google Search",
+    "Discord",
+    "Other",
+  ];
 
   useEffect(() => {
     startedAtRef.current = Date.now();
@@ -152,6 +164,29 @@ export function ApplyForm() {
             {experienceLevels.map((level) => (
               <option key={level} value={level}>
                 {level}
+              </option>
+            ))}
+          </select>
+        </Field>
+
+        <Field
+          label="How did you hear about TakeGeeks?"
+          htmlFor="heardFrom"
+        >
+          <select
+            id="heardFrom"
+            name="heardFrom"
+            required
+            defaultValue=""
+            className="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-900 outline-none transition-colors focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+          >
+            <option value="" disabled>
+              Select an option
+            </option>
+
+            {hearAboutOptions.map((option) => (
+              <option key={option} value={option}>
+                {option}
               </option>
             ))}
           </select>

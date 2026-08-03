@@ -34,11 +34,11 @@ export function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-3">
           <div>
            <div className="flex items-center">
-              <Image
-                src="/logo/Logo-large.png"
+             <Image
+                src="/logo/Logo-512.png"
                 alt="TakeGeeks"
-                width={180}
-                height={48}
+                width={512}
+                height={512}
                 className="h-12 w-auto object-contain"
               />
            </div>

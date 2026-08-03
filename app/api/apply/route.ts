@@ -11,6 +11,7 @@ const LIMITS = {
   phone: 30,
   github: 200,
   experience: 100,
+  heardFrom: 100,
   motivation: 3000,
 };
 
@@ -20,9 +21,10 @@ type ApplyPayload = {
   phone?: string;
   github?: string;
   experience: string;
+  heardFrom: string;
   motivation: string;
-  company?: string; // honeypot, should always be empty
-  startedAt?: number; // ms timestamp from when the form was rendered
+  company?: string;
+  startedAt?: number;
 };
 
 function isValidEmail(value: string) {
@@ -57,7 +59,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, email, phone, github, experience, motivation, company, startedAt } = body;
+  const { name, email, phone, github, experience, heardFrom, motivation, company, startedAt } = body;
 
   // 2. Honeypot: real users never fill this field in.
   if (company) {
@@ -70,9 +72,9 @@ export async function POST(req: NextRequest) {
   }
 
   // 4. Required fields.
-  if (!name?.trim() || !email?.trim() || !experience?.trim() || !motivation?.trim()) {
+  if (!name?.trim() || !email?.trim() || !experience?.trim() || !heardFrom?.trim() || !motivation?.trim()) {
     return NextResponse.json(
-      { error: "Name, email, experience level, and motivation are required." },
+      { error: "Name, email, experience level, how you heard about TakeGeeks, and motivation are required."},
       { status: 400 }
     );
   }
@@ -88,6 +90,7 @@ export async function POST(req: NextRequest) {
     (phone && phone.length > LIMITS.phone) ||
     (github && github.length > LIMITS.github) ||
     experience.length > LIMITS.experience ||
+    heardFrom.length > LIMITS.heardFrom ||
     motivation.length > LIMITS.motivation;
 
   if (tooLong) {
@@ -128,6 +131,7 @@ export async function POST(req: NextRequest) {
     `Phone: ${phone?.trim() || "-"}`,
     `GitHub / portfolio: ${github?.trim() || "-"}`,
     `Experience level: ${experience}`,
+    `Heard about TakeGeeks from: ${heardFrom}`,
     `Submitted from IP: ${ip}`,
     ``,
     `Why they want to join:`,
@@ -142,6 +146,7 @@ export async function POST(req: NextRequest) {
       <p><strong>Phone:</strong> ${escapeHtml(phone?.trim() || "-")}</p>
       <p><strong>GitHub / portfolio:</strong> ${escapeHtml(github?.trim() || "-")}</p>
       <p><strong>Experience level:</strong> ${escapeHtml(experience)}</p>
+      <p><strong>How they heard about TakeGeeks:</strong> ${escapeHtml(heardFrom)}</p>
       <p><strong>Why they want to join:</strong></p>
       <p style="white-space:pre-wrap;">${escapeHtml(motivation)}</p>
     </div>
@@ -156,8 +161,6 @@ try {
     text,
     html,
   });
-
-  console.log("Mail sent:", info);
 
   return NextResponse.json({ ok: true });
 }catch (err) {
