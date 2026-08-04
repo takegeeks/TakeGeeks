@@ -9,6 +9,7 @@ const LIMITS = {
   name: 100,
   email: 200,
   phone: 30,
+  location: 100,
   github: 200,
   experience: 100,
   heardFrom: 100,
@@ -19,6 +20,7 @@ type ApplyPayload = {
   name: string;
   email: string;
   phone?: string;
+  location: string;
   github?: string;
   experience: string;
   heardFrom: string;
@@ -59,7 +61,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
-  const { name, email, phone, github, experience, heardFrom, motivation, company, startedAt } = body;
+  const { name, email, phone,location, github, experience, heardFrom, motivation, company, startedAt } = body;
 
   // 2. Honeypot: real users never fill this field in.
   if (company) {
@@ -72,12 +74,23 @@ export async function POST(req: NextRequest) {
   }
 
   // 4. Required fields.
-  if (!name?.trim() || !email?.trim() || !phone?.trim() || !experience?.trim() || !heardFrom?.trim() || !motivation?.trim()) {
-    return NextResponse.json(
-      { error: "Name, email, phone, experience level, how you heard about TakeGeeks, and motivation are required."},
-      { status: 400 }
-    );
-  }
+  if (
+  !name?.trim() ||
+  !email?.trim() ||
+  !phone?.trim() ||
+  !location?.trim() ||
+  !experience?.trim() ||
+  !heardFrom?.trim() ||
+  !motivation?.trim()
+) {
+  return NextResponse.json(
+    {
+      error:
+        "Name, email, phone, city & state, experience level, how you heard about TakeGeeks, and motivation are required.",
+    },
+    { status: 400 }
+  );
+}
 
   if (!isValidEmail(email)) {
     return NextResponse.json({ error: "Enter a valid email address." }, { status: 400 });
@@ -88,6 +101,7 @@ export async function POST(req: NextRequest) {
     name.length > LIMITS.name ||
     email.length > LIMITS.email ||
     (phone && phone.length > LIMITS.phone) ||
+    location.length > LIMITS.location ||
     (github && github.length > LIMITS.github) ||
     experience.length > LIMITS.experience ||
     heardFrom.length > LIMITS.heardFrom ||
@@ -129,6 +143,7 @@ export async function POST(req: NextRequest) {
     `Name: ${name}`,
     `Email: ${email}`,
     `Phone: ${phone?.trim() || "-"}`,
+    `Location: ${location}`,
     `GitHub / portfolio: ${github?.trim() || "-"}`,
     `Experience level: ${experience}`,
     `Heard about TakeGeeks from: ${heardFrom}`,
@@ -144,6 +159,7 @@ export async function POST(req: NextRequest) {
       <p><strong>Name:</strong> ${escapeHtml(name)}</p>
       <p><strong>Email:</strong> ${escapeHtml(email)}</p>
       <p><strong>Phone:</strong> ${escapeHtml(phone?.trim() || "-")}</p>
+      <p><strong>Location:</strong> ${escapeHtml(location)}</p>
       <p><strong>GitHub / portfolio:</strong> ${escapeHtml(github?.trim() || "-")}</p>
       <p><strong>Experience level:</strong> ${escapeHtml(experience)}</p>
       <p><strong>How they heard about TakeGeeks:</strong> ${escapeHtml(heardFrom)}</p>

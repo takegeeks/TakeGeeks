@@ -134,7 +134,19 @@ export function ApplyForm() {
             name="phone"
             type="tel"
             maxLength={30}
-            placeholder="+1 555 000 1234"
+            placeholder="+91 987 654 3211"
+            className="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-900 outline-none transition-colors focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
+          />
+        </Field>
+
+        <Field label="City & State" htmlFor="location">
+          <input
+            id="location"
+            name="location"
+            type="text"
+            required
+            maxLength={100}
+            placeholder="Hyderabad, Telangana"
             className="h-11 w-full rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-900 outline-none transition-colors focus:border-blue-600 focus:ring-2 focus:ring-blue-100"
           />
         </Field>
@@ -142,7 +154,7 @@ export function ApplyForm() {
         <Field label="GitHub / portfolio (optional)" htmlFor="github">
           <input
             id="github"
-            name="github"
+            name="github" 
             type="url"
             maxLength={200}
             placeholder="https://github.com/janedoe"
